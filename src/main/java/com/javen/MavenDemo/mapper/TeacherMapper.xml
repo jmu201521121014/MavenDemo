@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javen.MavenDemo.dao.TeacherMapper">
+  <resultMap id="BaseResultMap" type="com.javen.MavenDemo.bean.Teacher">
+    <id column="tea_id" jdbcType="VARCHAR" property="teaId" />
+    <result column="tea_pass" jdbcType="VARCHAR" property="teaPass" />
+    <result column="tea_email" jdbcType="VARCHAR" property="teaEmail" />
+    <result column="tea_name" jdbcType="VARCHAR" property="teaName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    tea_id, tea_pass, tea_email, tea_name
+  </sql>
+  <select id="selectByExample" parameterType="com.javen.MavenDemo.bean.TeacherExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where tea_id = #{teaId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from teacher
+    where tea_id = #{teaId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.javen.MavenDemo.bean.TeacherExample">
+    delete from teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.javen.MavenDemo.bean.Teacher">
+    insert into teacher (tea_id, tea_pass, tea_email, 
+      tea_name)
+    values (#{teaId,jdbcType=VARCHAR}, #{teaPass,jdbcType=VARCHAR}, #{teaEmail,jdbcType=VARCHAR}, 
+      #{teaName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javen.MavenDemo.bean.Teacher">
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teaId != null">
+        tea_id,
+      </if>
+      <if test="teaPass != null">
+        tea_pass,
+      </if>
+      <if test="teaEmail != null">
+        tea_email,
+      </if>
+      <if test="teaName != null">
+        tea_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teaId != null">
+        #{teaId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaPass != null">
+        #{teaPass,jdbcType=VARCHAR},
+      </if>
+      <if test="teaEmail != null">
+        #{teaEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="teaName != null">
+        #{teaName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.javen.MavenDemo.bean.TeacherExample" resultType="java.lang.Long">
+    select count(*) from teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update teacher
+    <set>
+      <if test="record.teaId != null">
+        tea_id = #{record.teaId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaPass != null">
+        tea_pass = #{record.teaPass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaEmail != null">
+        tea_email = #{record.teaEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaName != null">
+        tea_name = #{record.teaName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update teacher
+    set tea_id = #{record.teaId,jdbcType=VARCHAR},
+      tea_pass = #{record.teaPass,jdbcType=VARCHAR},
+      tea_email = #{record.teaEmail,jdbcType=VARCHAR},
+      tea_name = #{record.teaName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javen.MavenDemo.bean.Teacher">
+    update teacher
+    <set>
+      <if test="teaPass != null">
+        tea_pass = #{teaPass,jdbcType=VARCHAR},
+      </if>
+      <if test="teaEmail != null">
+        tea_email = #{teaEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="teaName != null">
+        tea_name = #{teaName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tea_id = #{teaId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javen.MavenDemo.bean.Teacher">
+    update teacher
+    set tea_pass = #{teaPass,jdbcType=VARCHAR},
+      tea_email = #{teaEmail,jdbcType=VARCHAR},
+      tea_name = #{teaName,jdbcType=VARCHAR}
+    where tea_id = #{teaId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javen.MavenDemo.dao.QuestionMapper">
+  <resultMap id="BaseResultMap" type="com.javen.MavenDemo.bean.Question">
+    <id column="que_no" jdbcType="VARCHAR" property="queNo" />
+    <result column="que_type" jdbcType="VARCHAR" property="queType" />
+    <result column="que_score" jdbcType="INTEGER" property="queScore" />
+    <result column="que_des" jdbcType="VARCHAR" property="queDes" />
+    <result column="que_answer" jdbcType="VARCHAR" property="queAnswer" />
+    <result column="que_a" jdbcType="VARCHAR" property="queA" />
+    <result column="que_b" jdbcType="VARCHAR" property="queB" />
+    <result column="que_c" jdbcType="VARCHAR" property="queC" />
+    <result column="que_d" jdbcType="VARCHAR" property="queD" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    que_no, que_type, que_score, que_des, que_answer, que_a, que_b, que_c, que_d
+  </sql>
+  <select id="selectByExample" parameterType="com.javen.MavenDemo.bean.QuestionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from question
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question
+    where que_no = #{queNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from question
+    where que_no = #{queNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.javen.MavenDemo.bean.QuestionExample">
+    delete from question
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.javen.MavenDemo.bean.Question">
+    insert into question (que_no, que_type, que_score, 
+      que_des, que_answer, que_a, 
+      que_b, que_c, que_d)
+    values (#{queNo,jdbcType=VARCHAR}, #{queType,jdbcType=VARCHAR}, #{queScore,jdbcType=INTEGER}, 
+      #{queDes,jdbcType=VARCHAR}, #{queAnswer,jdbcType=VARCHAR}, #{queA,jdbcType=VARCHAR}, 
+      #{queB,jdbcType=VARCHAR}, #{queC,jdbcType=VARCHAR}, #{queD,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javen.MavenDemo.bean.Question">
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="queNo != null">
+        que_no,
+      </if>
+      <if test="queType != null">
+        que_type,
+      </if>
+      <if test="queScore != null">
+        que_score,
+      </if>
+      <if test="queDes != null">
+        que_des,
+      </if>
+      <if test="queAnswer != null">
+        que_answer,
+      </if>
+      <if test="queA != null">
+        que_a,
+      </if>
+      <if test="queB != null">
+        que_b,
+      </if>
+      <if test="queC != null">
+        que_c,
+      </if>
+      <if test="queD != null">
+        que_d,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="queNo != null">
+        #{queNo,jdbcType=VARCHAR},
+      </if>
+      <if test="queType != null">
+        #{queType,jdbcType=VARCHAR},
+      </if>
+      <if test="queScore != null">
+        #{queScore,jdbcType=INTEGER},
+      </if>
+      <if test="queDes != null">
+        #{queDes,jdbcType=VARCHAR},
+      </if>
+      <if test="queAnswer != null">
+        #{queAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="queA != null">
+        #{queA,jdbcType=VARCHAR},
+      </if>
+      <if test="queB != null">
+        #{queB,jdbcType=VARCHAR},
+      </if>
+      <if test="queC != null">
+        #{queC,jdbcType=VARCHAR},
+      </if>
+      <if test="queD != null">
+        #{queD,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.javen.MavenDemo.bean.QuestionExample" resultType="java.lang.Long">
+    select count(*) from question
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update question
+    <set>
+      <if test="record.queNo != null">
+        que_no = #{record.queNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queType != null">
+        que_type = #{record.queType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queScore != null">
+        que_score = #{record.queScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.queDes != null">
+        que_des = #{record.queDes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queAnswer != null">
+        que_answer = #{record.queAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queA != null">
+        que_a = #{record.queA,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queB != null">
+        que_b = #{record.queB,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queC != null">
+        que_c = #{record.queC,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queD != null">
+        que_d = #{record.queD,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update question
+    set que_no = #{record.queNo,jdbcType=VARCHAR},
+      que_type = #{record.queType,jdbcType=VARCHAR},
+      que_score = #{record.queScore,jdbcType=INTEGER},
+      que_des = #{record.queDes,jdbcType=VARCHAR},
+      que_answer = #{record.queAnswer,jdbcType=VARCHAR},
+      que_a = #{record.queA,jdbcType=VARCHAR},
+      que_b = #{record.queB,jdbcType=VARCHAR},
+      que_c = #{record.queC,jdbcType=VARCHAR},
+      que_d = #{record.queD,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javen.MavenDemo.bean.Question">
+    update question
+    <set>
+      <if test="queType != null">
+        que_type = #{queType,jdbcType=VARCHAR},
+      </if>
+      <if test="queScore != null">
+        que_score = #{queScore,jdbcType=INTEGER},
+      </if>
+      <if test="queDes != null">
+        que_des = #{queDes,jdbcType=VARCHAR},
+      </if>
+      <if test="queAnswer != null">
+        que_answer = #{queAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="queA != null">
+        que_a = #{queA,jdbcType=VARCHAR},
+      </if>
+      <if test="queB != null">
+        que_b = #{queB,jdbcType=VARCHAR},
+      </if>
+      <if test="queC != null">
+        que_c = #{queC,jdbcType=VARCHAR},
+      </if>
+      <if test="queD != null">
+        que_d = #{queD,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where que_no = #{queNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javen.MavenDemo.bean.Question">
+    update question
+    set que_type = #{queType,jdbcType=VARCHAR},
+      que_score = #{queScore,jdbcType=INTEGER},
+      que_des = #{queDes,jdbcType=VARCHAR},
+      que_answer = #{queAnswer,jdbcType=VARCHAR},
+      que_a = #{queA,jdbcType=VARCHAR},
+      que_b = #{queB,jdbcType=VARCHAR},
+      que_c = #{queC,jdbcType=VARCHAR},
+      que_d = #{queD,jdbcType=VARCHAR}
+    where que_no = #{queNo,jdbcType=VARCHAR}
+  </update>
+</mapper>
