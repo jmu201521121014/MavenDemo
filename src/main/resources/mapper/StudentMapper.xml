@@ -108,14 +108,6 @@
       #{stuName,jdbcType=VARCHAR}, #{stuSex,jdbcType=VARCHAR}, #{stuPhone,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="inserttest" parameterType="com.javen.MavenDemo.bean.Student">
-    insert into student (stu_id, stu_pass, stu_email, 
-      stu_name, stu_sex, stu_phone
-      )
-    values (#{stuId,jdbcType=VARCHAR}, #{stuPass,jdbcType=VARCHAR}, #{stuEmail,jdbcType=VARCHAR}, 
-      #{stuName,jdbcType=VARCHAR}, #{stuSex,jdbcType=VARCHAR}, #{stuPhone,jdbcType=VARCHAR}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.javen.MavenDemo.bean.Student">
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides=",">
