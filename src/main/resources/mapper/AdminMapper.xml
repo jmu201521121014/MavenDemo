@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.javen.MavenDemo.dao.AdminMapper">
   <resultMap id="BaseResultMap" type="com.javen.MavenDemo.bean.Admin">
-    <id column="adm_id" jdbcType="VARCHAR" property="admId" />
-    <result column="adm_pas" jdbcType="VARCHAR" property="admPas" />
+    <id column="adm_id" jdbcType="INTEGER" property="admId" />
+    <result column="adm_name" jdbcType="VARCHAR" property="admName" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    adm_id, adm_pas
+    adm_id, adm_name, user_id
   </sql>
   <select id="selectByExample" parameterType="com.javen.MavenDemo.bean.AdminExample" resultMap="BaseResultMap">
     select
@@ -80,15 +81,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from admin
-    where adm_id = #{admId,jdbcType=VARCHAR}
+    where adm_id = #{admId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from admin
-    where adm_id = #{admId,jdbcType=VARCHAR}
+    where adm_id = #{admId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.javen.MavenDemo.bean.AdminExample">
     delete from admin
@@ -97,8 +98,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.javen.MavenDemo.bean.Admin">
-    insert into admin (adm_id, adm_pas)
-    values (#{admId,jdbcType=VARCHAR}, #{admPas,jdbcType=VARCHAR})
+    insert into admin (adm_id, adm_name, user_id
+      )
+    values (#{admId,jdbcType=INTEGER}, #{admName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.javen.MavenDemo.bean.Admin">
     insert into admin
@@ -106,16 +109,22 @@
       <if test="admId != null">
         adm_id,
       </if>
-      <if test="admPas != null">
-        adm_pas,
+      <if test="admName != null">
+        adm_name,
+      </if>
+      <if test="userId != null">
+        user_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="admId != null">
-        #{admId,jdbcType=VARCHAR},
+        #{admId,jdbcType=INTEGER},
       </if>
-      <if test="admPas != null">
-        #{admPas,jdbcType=VARCHAR},
+      <if test="admName != null">
+        #{admName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -129,10 +138,13 @@
     update admin
     <set>
       <if test="record.admId != null">
-        adm_id = #{record.admId,jdbcType=VARCHAR},
+        adm_id = #{record.admId,jdbcType=INTEGER},
       </if>
-      <if test="record.admPas != null">
-        adm_pas = #{record.admPas,jdbcType=VARCHAR},
+      <if test="record.admName != null">
+        adm_name = #{record.admName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -141,8 +153,9 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update admin
-    set adm_id = #{record.admId,jdbcType=VARCHAR},
-      adm_pas = #{record.admPas,jdbcType=VARCHAR}
+    set adm_id = #{record.admId,jdbcType=INTEGER},
+      adm_name = #{record.admName,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -150,15 +163,19 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.javen.MavenDemo.bean.Admin">
     update admin
     <set>
-      <if test="admPas != null">
-        adm_pas = #{admPas,jdbcType=VARCHAR},
+      <if test="admName != null">
+        adm_name = #{admName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
     </set>
-    where adm_id = #{admId,jdbcType=VARCHAR}
+    where adm_id = #{admId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.javen.MavenDemo.bean.Admin">
     update admin
-    set adm_pas = #{admPas,jdbcType=VARCHAR}
-    where adm_id = #{admId,jdbcType=VARCHAR}
+    set adm_name = #{admName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where adm_id = #{admId,jdbcType=INTEGER}
   </update>
 </mapper>

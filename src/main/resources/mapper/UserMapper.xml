@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.javen.MavenDemo.dao.TeacherMapper">
-  <resultMap id="BaseResultMap" type="com.javen.MavenDemo.bean.Teacher">
-    <id column="tea_id" jdbcType="INTEGER" property="teaId" />
-    <result column="tea_pass" jdbcType="VARCHAR" property="teaPass" />
-    <result column="tea_email" jdbcType="VARCHAR" property="teaEmail" />
-    <result column="tea_name" jdbcType="VARCHAR" property="teaName" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
+<mapper namespace="com.javen.MavenDemo.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.javen.MavenDemo.bean.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_pas" jdbcType="VARCHAR" property="userPas" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,15 +66,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    tea_id, tea_pass, tea_email, tea_name, user_id
+    user_id, user_pas, role, user_name
   </sql>
-  <select id="selectByExample" parameterType="com.javen.MavenDemo.bean.TeacherExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.javen.MavenDemo.bean.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from teacher
+    from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,85 +85,76 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from teacher
-    where tea_id = #{teaId,jdbcType=INTEGER}
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from teacher
-    where tea_id = #{teaId,jdbcType=INTEGER}
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.javen.MavenDemo.bean.TeacherExample">
-    delete from teacher
+  <delete id="deleteByExample" parameterType="com.javen.MavenDemo.bean.UserExample">
+    delete from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.javen.MavenDemo.bean.Teacher">
-    insert into teacher (tea_id, tea_pass, tea_email, 
-      tea_name, user_id)
-    values (#{teaId,jdbcType=INTEGER}, #{teaPass,jdbcType=VARCHAR}, #{teaEmail,jdbcType=VARCHAR}, 
-      #{teaName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.javen.MavenDemo.bean.User">
+    insert into user (user_id, user_pas, role, 
+      user_name)
+    values (#{userId,jdbcType=INTEGER}, #{userPas,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.javen.MavenDemo.bean.Teacher">
-    insert into teacher
+  <insert id="insertSelective" parameterType="com.javen.MavenDemo.bean.User">
+    insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="teaId != null">
-        tea_id,
-      </if>
-      <if test="teaPass != null">
-        tea_pass,
-      </if>
-      <if test="teaEmail != null">
-        tea_email,
-      </if>
-      <if test="teaName != null">
-        tea_name,
-      </if>
       <if test="userId != null">
         user_id,
       </if>
+      <if test="userPas != null">
+        user_pas,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="teaId != null">
-        #{teaId,jdbcType=INTEGER},
-      </if>
-      <if test="teaPass != null">
-        #{teaPass,jdbcType=VARCHAR},
-      </if>
-      <if test="teaEmail != null">
-        #{teaEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="teaName != null">
-        #{teaName,jdbcType=VARCHAR},
-      </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
+      <if test="userPas != null">
+        #{userPas,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.javen.MavenDemo.bean.TeacherExample" resultType="java.lang.Long">
-    select count(*) from teacher
+  <select id="countByExample" parameterType="com.javen.MavenDemo.bean.UserExample" resultType="java.lang.Long">
+    select count(*) from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update teacher
+    update user
     <set>
-      <if test="record.teaId != null">
-        tea_id = #{record.teaId,jdbcType=INTEGER},
-      </if>
-      <if test="record.teaPass != null">
-        tea_pass = #{record.teaPass,jdbcType=VARCHAR},
-      </if>
-      <if test="record.teaEmail != null">
-        tea_email = #{record.teaEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="record.teaName != null">
-        tea_name = #{record.teaName,jdbcType=VARCHAR},
-      </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userPas != null">
+        user_pas = #{record.userPas,jdbcType=VARCHAR},
+      </if>
+      <if test="record.role != null">
+        role = #{record.role,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -172,40 +162,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update teacher
-    set tea_id = #{record.teaId,jdbcType=INTEGER},
-      tea_pass = #{record.teaPass,jdbcType=VARCHAR},
-      tea_email = #{record.teaEmail,jdbcType=VARCHAR},
-      tea_name = #{record.teaName,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=INTEGER}
+    update user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_pas = #{record.userPas,jdbcType=VARCHAR},
+      role = #{record.role,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.javen.MavenDemo.bean.Teacher">
-    update teacher
+  <update id="updateByPrimaryKeySelective" parameterType="com.javen.MavenDemo.bean.User">
+    update user
     <set>
-      <if test="teaPass != null">
-        tea_pass = #{teaPass,jdbcType=VARCHAR},
+      <if test="userPas != null">
+        user_pas = #{userPas,jdbcType=VARCHAR},
       </if>
-      <if test="teaEmail != null">
-        tea_email = #{teaEmail,jdbcType=VARCHAR},
+      <if test="role != null">
+        role = #{role,jdbcType=VARCHAR},
       </if>
-      <if test="teaName != null">
-        tea_name = #{teaName,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
       </if>
     </set>
-    where tea_id = #{teaId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.javen.MavenDemo.bean.Teacher">
-    update teacher
-    set tea_pass = #{teaPass,jdbcType=VARCHAR},
-      tea_email = #{teaEmail,jdbcType=VARCHAR},
-      tea_name = #{teaName,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=INTEGER}
-    where tea_id = #{teaId,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.javen.MavenDemo.bean.User">
+    update user
+    set user_pas = #{userPas,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

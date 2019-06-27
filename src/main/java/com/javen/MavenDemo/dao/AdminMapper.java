@@ -10,7 +10,7 @@ public interface AdminMapper {
 
     int deleteByExample(AdminExample example);
 
-    int deleteByPrimaryKey(String admId);
+    int deleteByPrimaryKey(Integer admId);
 
     int insert(Admin record);
 
@@ -18,7 +18,7 @@ public interface AdminMapper {
 
     List<Admin> selectByExample(AdminExample example);
 
-    Admin selectByPrimaryKey(String admId);
+    Admin selectByPrimaryKey(Integer admId);
 
     int updateByExampleSelective(@Param("record") Admin record, @Param("example") AdminExample example);
 

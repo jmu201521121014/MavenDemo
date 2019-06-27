@@ -1,23 +1,33 @@
 package com.javen.MavenDemo.bean;
 
 public class Admin {
-    private String admId;
+    private Integer admId;
 
-    private String admPas;
+    private String admName;
 
-    public String getAdmId() {
+    private Integer userId;
+
+    public Integer getAdmId() {
         return admId;
     }
 
-    public void setAdmId(String admId) {
-        this.admId = admId == null ? null : admId.trim();
+    public void setAdmId(Integer admId) {
+        this.admId = admId;
     }
 
-    public String getAdmPas() {
-        return admPas;
+    public String getAdmName() {
+        return admName;
     }
 
-    public void setAdmPas(String admPas) {
-        this.admPas = admPas == null ? null : admPas.trim();
+    public void setAdmName(String admName) {
+        this.admName = admName == null ? null : admName.trim();
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

@@ -2,12 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.javen.MavenDemo.dao.StudentMapper">
   <resultMap id="BaseResultMap" type="com.javen.MavenDemo.bean.Student">
-    <id column="stu_id" jdbcType="VARCHAR" property="stuId" />
+    <id column="stu_id" jdbcType="INTEGER" property="stuId" />
     <result column="stu_pass" jdbcType="VARCHAR" property="stuPass" />
     <result column="stu_email" jdbcType="VARCHAR" property="stuEmail" />
     <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
     <result column="stu_sex" jdbcType="VARCHAR" property="stuSex" />
     <result column="stu_phone" jdbcType="VARCHAR" property="stuPhone" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    stu_id, stu_pass, stu_email, stu_name, stu_sex, stu_phone
+    stu_id, stu_pass, stu_email, stu_name, stu_sex, stu_phone, user_id
   </sql>
   <select id="selectByExample" parameterType="com.javen.MavenDemo.bean.StudentExample" resultMap="BaseResultMap">
     select
@@ -84,15 +85,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from student
-    where stu_id = #{stuId,jdbcType=VARCHAR}
+    where stu_id = #{stuId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from student
-    where stu_id = #{stuId,jdbcType=VARCHAR}
+    where stu_id = #{stuId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.javen.MavenDemo.bean.StudentExample">
     delete from student
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.javen.MavenDemo.bean.Student">
     insert into student (stu_id, stu_pass, stu_email, 
-      stu_name, stu_sex, stu_phone
-      )
-    values (#{stuId,jdbcType=VARCHAR}, #{stuPass,jdbcType=VARCHAR}, #{stuEmail,jdbcType=VARCHAR}, 
-      #{stuName,jdbcType=VARCHAR}, #{stuSex,jdbcType=VARCHAR}, #{stuPhone,jdbcType=VARCHAR}
-      )
+      stu_name, stu_sex, stu_phone, 
+      user_id)
+    values (#{stuId,jdbcType=INTEGER}, #{stuPass,jdbcType=VARCHAR}, #{stuEmail,jdbcType=VARCHAR}, 
+      #{stuName,jdbcType=VARCHAR}, #{stuSex,jdbcType=VARCHAR}, #{stuPhone,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.javen.MavenDemo.bean.Student">
     insert into student
@@ -129,10 +130,13 @@
       <if test="stuPhone != null">
         stu_phone,
       </if>
+      <if test="userId != null">
+        user_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="stuId != null">
-        #{stuId,jdbcType=VARCHAR},
+        #{stuId,jdbcType=INTEGER},
       </if>
       <if test="stuPass != null">
         #{stuPass,jdbcType=VARCHAR},
@@ -149,6 +153,9 @@
       <if test="stuPhone != null">
         #{stuPhone,jdbcType=VARCHAR},
       </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.javen.MavenDemo.bean.StudentExample" resultType="java.lang.Long">
@@ -161,7 +168,7 @@
     update student
     <set>
       <if test="record.stuId != null">
-        stu_id = #{record.stuId,jdbcType=VARCHAR},
+        stu_id = #{record.stuId,jdbcType=INTEGER},
       </if>
       <if test="record.stuPass != null">
         stu_pass = #{record.stuPass,jdbcType=VARCHAR},
@@ -178,6 +185,9 @@
       <if test="record.stuPhone != null">
         stu_phone = #{record.stuPhone,jdbcType=VARCHAR},
       </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -185,12 +195,13 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update student
-    set stu_id = #{record.stuId,jdbcType=VARCHAR},
+    set stu_id = #{record.stuId,jdbcType=INTEGER},
       stu_pass = #{record.stuPass,jdbcType=VARCHAR},
       stu_email = #{record.stuEmail,jdbcType=VARCHAR},
       stu_name = #{record.stuName,jdbcType=VARCHAR},
       stu_sex = #{record.stuSex,jdbcType=VARCHAR},
-      stu_phone = #{record.stuPhone,jdbcType=VARCHAR}
+      stu_phone = #{record.stuPhone,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,8 +224,11 @@
       <if test="stuPhone != null">
         stu_phone = #{stuPhone,jdbcType=VARCHAR},
       </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
     </set>
-    where stu_id = #{stuId,jdbcType=VARCHAR}
+    where stu_id = #{stuId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.javen.MavenDemo.bean.Student">
     update student
@@ -222,7 +236,8 @@
       stu_email = #{stuEmail,jdbcType=VARCHAR},
       stu_name = #{stuName,jdbcType=VARCHAR},
       stu_sex = #{stuSex,jdbcType=VARCHAR},
-      stu_phone = #{stuPhone,jdbcType=VARCHAR}
-    where stu_id = #{stuId,jdbcType=VARCHAR}
+      stu_phone = #{stuPhone,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where stu_id = #{stuId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,18 +1,19 @@
 package com.javen.MavenDemo.bean;
 
 public class Student {
-	@ExcelProperty(index = 0)
-    private String stuId;  //账号
-	@ExcelProperty(index = 1)
-    private String stuPass;  //密码
-	@ExcelProperty(index = 2)
-    private String stuEmail;  //邮箱
-	@ExcelProperty(index = 3)
-    private String stuName;  //姓名
-	@ExcelProperty(index = 4)
-    private String stuSex;  //性别
-	@ExcelProperty(index = 5)
-    private String stuPhone;  //电话
+    private Integer stuId;
+
+    private String stuPass;
+
+    private String stuEmail;
+
+    private String stuName;
+
+    private String stuSex;
+
+    private String stuPhone;
+
+    private Integer userId;
     
 
     public Student() {
@@ -20,7 +21,8 @@ public class Student {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Student(String stuId, String stuPass, String stuEmail, String stuName, String stuSex, String stuPhone) {
+	public Student(Integer stuId, String stuPass, String stuEmail, String stuName, String stuSex, String stuPhone,
+			Integer userId) {
 		super();
 		this.stuId = stuId;
 		this.stuPass = stuPass;
@@ -28,14 +30,15 @@ public class Student {
 		this.stuName = stuName;
 		this.stuSex = stuSex;
 		this.stuPhone = stuPhone;
+		this.userId = userId;
 	}
 
-	public String getStuId() {
+	public Integer getStuId() {
         return stuId;
     }
 
-    public void setStuId(String stuId) {
-        this.stuId = stuId == null ? null : stuId.trim();
+    public void setStuId(Integer stuId) {
+        this.stuId = stuId;
     }
 
     public String getStuPass() {
@@ -77,11 +80,12 @@ public class Student {
     public void setStuPhone(String stuPhone) {
         this.stuPhone = stuPhone == null ? null : stuPhone.trim();
     }
-    
-    @Override
-	public String toString() {
-		return "Student [stuId=" + stuId + ", stuPass=" + stuPass + ", stuEmail=" + stuEmail + ", stuName=" + stuName + ", stuSex="
-				+ stuSex + ", stuPhone=" + stuPhone + "]";
-	}
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 }

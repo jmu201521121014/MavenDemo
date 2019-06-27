@@ -1,7 +1,7 @@
 package com.javen.MavenDemo.bean;
 
 public class Teacher {
-    private String teaId;
+    private Integer teaId;
 
     private String teaPass;
 
@@ -9,12 +9,14 @@ public class Teacher {
 
     private String teaName;
 
-    public String getTeaId() {
+    private Integer userId;
+
+    public Integer getTeaId() {
         return teaId;
     }
 
-    public void setTeaId(String teaId) {
-        this.teaId = teaId == null ? null : teaId.trim();
+    public void setTeaId(Integer teaId) {
+        this.teaId = teaId;
     }
 
     public String getTeaPass() {
@@ -39,5 +41,13 @@ public class Teacher {
 
     public void setTeaName(String teaName) {
         this.teaName = teaName == null ? null : teaName.trim();
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
