@@ -1,17 +1,18 @@
 package com.javen.MavenDemo.bean;
 
 public class Student {
-    private String stuId;
-
-    private String stuPass;
-
-    private String stuEmail;
-
-    private String stuName;
-
-    private String stuSex;
-
-    private String stuPhone;
+	@ExcelProperty(index = 0)
+    private String stuId;  //账号
+	@ExcelProperty(index = 1)
+    private String stuPass;  //密码
+	@ExcelProperty(index = 2)
+    private String stuEmail;  //邮箱
+	@ExcelProperty(index = 3)
+    private String stuName;  //姓名
+	@ExcelProperty(index = 4)
+    private String stuSex;  //性别
+	@ExcelProperty(index = 5)
+    private String stuPhone;  //电话
     
 
     public Student() {
@@ -76,4 +77,11 @@ public class Student {
     public void setStuPhone(String stuPhone) {
         this.stuPhone = stuPhone == null ? null : stuPhone.trim();
     }
+    
+    @Override
+	public String toString() {
+		return "Student [stuId=" + stuId + ", stuPass=" + stuPass + ", stuEmail=" + stuEmail + ", stuName=" + stuName + ", stuSex="
+				+ stuSex + ", stuPhone=" + stuPhone + "]";
+	}
+
 }
