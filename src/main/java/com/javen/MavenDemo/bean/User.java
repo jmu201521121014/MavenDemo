@@ -1,6 +1,8 @@
 package com.javen.MavenDemo.bean;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
     private Integer userId;
 
     private String userPas;
@@ -9,7 +11,16 @@ public class User {
 
     private String userName;
 
-    public Integer getUserId() {
+    
+    public User(Integer userId, String userPas, String role, String userName) {
+		super();
+		this.userId = userId;
+		this.userPas = userPas;
+		this.role = role;
+		this.userName = userName;
+	}
+
+	public Integer getUserId() {
         return userId;
     }
 

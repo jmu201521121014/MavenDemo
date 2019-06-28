@@ -7,6 +7,11 @@
     <result column="role" jdbcType="VARCHAR" property="role" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
   </resultMap>
+  
+  <select id="loginForm" resultType="com.javen.MavenDemo.bean.User">
+		SELECT * FROM user WHERE user_name = #{userName} AND user_pas = #{userPas} AND role = #{role}
+  </select>
+	
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

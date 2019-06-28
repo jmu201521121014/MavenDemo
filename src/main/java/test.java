@@ -4,20 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.javen.MavenDemo.bean.Student;
+import com.javen.MavenDemo.bean.User;
 import com.javen.MavenDemo.dao.StudentMapper;
+import com.javen.MavenDemo.dao.UserMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:spring-context.xml"})
 public class test {
 	@Autowired
-	StudentMapper stuMapper;
+	UserMapper userMapper;
 	
 	@Test
 	public void testcrud(){
-		Student stu = new Student("201621121008","123","1","wen","ÄÐ","16521313");
-		//stuMapper.insertSelective(new Student("201621121008","123","1","wen","ÄÐ","16521313"));
-        stuMapper.insertSelective(stu);
+		userMapper.insertSelective(new User(null,"123","0","admin1"));
+		//stuMapper.insertSelective(new Student("201621121008","123","1","wen","ï¿½ï¿½","16521313"));
+        
 		//System.out.println(stu.getStuName());
 			
 	}
