@@ -12,7 +12,12 @@ public class User implements Serializable{
     private String userName;
 
     
-    public User(Integer userId, String userPas, String role, String userName) {
+    public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(Integer userId, String userPas, String role, String userName) {
 		super();
 		this.userId = userId;
 		this.userPas = userPas;

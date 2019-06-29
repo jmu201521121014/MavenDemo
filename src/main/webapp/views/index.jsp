@@ -5,19 +5,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="${APP_PATH}/scripts/jquery-1.7.1.js"></script>
-<title>教学辅助系统</title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
+<title>教学辅助系统</title>
 <link rel="stylesheet" type="text/css" href="${APP_PATH}/css/login.css" />
+<script src="../scripts/jquery-1.7.1.js"></script>
 </head>
 <body>
 	<div id="login_center">
 		<div id="login_area">
 			<div id="login_box" style="background: url('../images/background.jpg') 0px 0px no-repeat;">
 				<div id="login_form">
-					<form action="login" method="post" name="loginForm" id="a">
+					<form method="post" name="loginForm" id="a">
 						<input type="hidden" name="type" id="type">
 						<table>
 							<div id="login_tip">
@@ -27,7 +27,7 @@
 								</tr>
 								<tr>
 									<td>密码: &nbsp</td>
-									<td><input type="password" name="userPas" class="pwd" required></td>
+									<td><input type="password" name="userPas" class="userPas" required></td>
 								</tr>
 								<tr>
 									<td>角色: &nbsp</td>
@@ -43,7 +43,7 @@
 						</table>
 						</br>
 						<text>&nbsp&nbsp&nbsp</text>
-						<input type="button" value="登录" class="login_btn" onclick="loginValidate()">
+						<input type="button" value="登录" class="login_btn"  onclick="loginValidate()">
 						<text>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</text>
 						<input type="reset" class="login_btn" value="重 置">
 					</form>
@@ -58,17 +58,17 @@ function loginValidate() {
 	var role = parseInt(document.getElementById("role").value);
         $.ajax({
             type: 'POST',
-            url: '/loginForm',
+            url: '../loginForm',
             data: $("#a").serialize(),
             dataType: 'json',
             success: function (res) {
-                if(res == "true"){
+                if(res.success){
                 	if(role==0)
-                		window.open('/views/Admin.jsp','_self');
+                		window.open('../views/Admin.jsp','_self');
                 	else if(role==1)
-                		window.open('/views/Teacher.jsp','_self');
+                		window.open('../views/Teacher.jsp','_self');
                 	else
-                		window.open('/views/Student.jsp','_self');
+                		window.open('../views/Student.jsp','_self');
                 }else{
                 	alert("账号或密码错误");
                 }
@@ -78,6 +78,5 @@ function loginValidate() {
 			}
         });
 }
-
 </script>
 </html>

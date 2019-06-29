@@ -9,7 +9,9 @@
   </resultMap>
   
   <select id="loginForm" resultType="com.javen.MavenDemo.bean.User">
-		SELECT * FROM user WHERE user_name = #{userName} AND user_pas = #{userPas} AND role = #{role}
+		SELECT 
+		<include refid="Base_Column_List" />
+	 FROM user WHERE user_name = #{userName} AND user_pas = #{userPas} AND role = #{role}
   </select>
 	
   <sql id="Example_Where_Clause">
