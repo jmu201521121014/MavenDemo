@@ -1,18 +1,19 @@
 package com.javen.MavenDemo.bean;
 
 public class Student {
+	@ExcelProperty(index = 0)
     private Integer stuId;
-
+	@ExcelProperty(index = 1)
     private String stuPass;
-
+	@ExcelProperty(index = 2)
     private String stuEmail;
-
+	@ExcelProperty(index = 3)
     private String stuName;
-
+	@ExcelProperty(index = 4)
     private String stuSex;
-
+	@ExcelProperty(index = 5)
     private String stuPhone;
-
+	@ExcelProperty(index = 6)
     private Integer userId;
     
 
@@ -21,6 +22,12 @@ public class Student {
 		// TODO Auto-generated constructor stub
 	}
 
+    @Override
+	public String toString() {
+		return "Student [stuId=" + stuId + ", stuPass=" + stuPass + ", stuEmail=" + stuEmail + ", stuName=" + stuName + ", stuSex="
+				+ stuSex + ", stuPhone=" + stuPhone + ", userId=" + userId + "]";
+	}
+    
 	public Student(Integer stuId, String stuPass, String stuEmail, String stuName, String stuSex, String stuPhone,
 			Integer userId) {
 		super();

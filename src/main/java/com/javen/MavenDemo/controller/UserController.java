@@ -11,14 +11,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.javen.MavenDemo.bean.User;
-import com.javen.MavenDemo.utils.ServerResponse;
 import com.javen.MavenDemo.bean.Admin; 
 import com.javen.MavenDemo.service.UserService;
+import com.javen.MavenDemo.bean.ServerResponse;
 
 @Controller
 public class UserController {
 	@Autowired
 	UserService userService;
+	StudentService studentService;
 	
 	@RequestMapping(value="/login",method = {RequestMethod.POST,RequestMethod.GET})
 	public String login(){
@@ -31,7 +32,7 @@ public class UserController {
 	public Object loginForm(User bo,HttpSession session) throws Exception {
 		ServerResponse result = new ServerResponse();
 		User user = userService.loginForm(bo);
-		if(user != null)                            //��������û�
+		if(user != null)                            
 		{
 			result.setSuccess(true);
 			session.setAttribute("user", user);
@@ -40,6 +41,11 @@ public class UserController {
 			result.setSuccess(false);
 		return result;
 	}
+//	@ResponseBody
+//	@RequestMapping(value = "/loginForm",method = {RequestMethod.POST,RequestMethod.GET})
+//	public void loginform() {
+//		System.out.print("d");
+//	}
 	
 	
 }
