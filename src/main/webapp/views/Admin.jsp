@@ -10,7 +10,7 @@
 %>
 <title>管理员</title>
 <link rel="stylesheet" type="text/css" href="../css/index.css" />
-<script src="${APP_PATH }/scripts/jquery-1.7.1.js"></script>
+<script src="../scripts/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="../scripts/Admin.js"></script>
 <script type="text/javascript" src="../scripts/newstu.js"></script>
 <script type="text/javascript" src="../scripts/newtea.js"></script>
